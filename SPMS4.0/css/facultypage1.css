@@ -1,0 +1,187 @@
+body{
+    margin: 0;
+    background: #f0f0f0;
+}
+
+
+.student_info {
+    background: #48D1CC;
+    padding: 3px;
+    
+}
+
+.student_logo{
+    height: 60px;
+    
+}
+.student_section{
+    display: flex;
+    justify-content: center;
+    padding-right: 60px;
+    color: white;
+    letter-spacing: 2px;
+    
+    
+}
+
+
+.logout{
+    
+    width: 70px;
+    height: 30px;
+    margin-left: 10px;
+    margin-top:10px ;
+    background: #047f81;
+    text-align: center;
+    padding-top: 5px;
+    border-radius: 5px;
+
+
+}
+
+.logout >a{
+    text-decoration: none;
+    color:white;
+}
+
+.student_section:hover {
+    background: #039da0;
+    
+    
+}
+.spmslg{
+    padding-left: 5px;
+    color: white;
+    font-size:20px;
+}
+.nav_{
+    display:flex;
+    justify-content: space-between;
+}
+.student_name{
+    display: flex;
+    margin-top:20px ;
+    margin-left: 15%;
+    font-size: 20px;
+    background:#48D1CC;
+    color:white;
+    width: 20%;
+    text-align: center;
+    justify-content: space-around;
+}
+table {
+    margin-top: 20px;
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    border-collapse: collapse;
+    width: 100%;
+}
+th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+th {
+    background-color:#48D1CC;
+    color: white;
+}
+tr:nth-child(even) {
+    background-color: #6de020;
+}
+
+
+/* imported */
+
+nav {
+    background-color: #008080;
+    width: 180px;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    
+  }
+  
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  nav li {
+    padding: 10px;
+    margin: 0;
+  }
+  
+  nav li a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  nav li:hover {
+    background-color: #20B2AA;
+    
+    
+  }
+  a:visited {
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: none;
+    color: white;
+    
+  }
+  
+  .nav-title{
+    color:white;
+    background:#008B8B;
+    padding:2%;
+    text-align:center;
+    font-size:30px;
+  }
+
+.dashboard{
+  display: flex;
+  justify-content: space-between;
+  height: 300px;
+  width: 800px;
+  background: rgb(255, 117, 75);
+  color:white;
+  margin-left: 300px;
+  margin-top:10px ;
+  font-size: 30px;
+  border-radius: 20px;
+}
+
+hr{
+ color: #039da0;
+ height: 2px;
+}
+.student_search{
+  margin-left: 300px;
+  margin-top:10px ;
+}
+.search_data{
+  margin-left: 150px;
+  margin-top:10px ;
+  margin-bottom: 50px;
+}
+#i1{
+  margin-top: 5px;
+  width: 300px;
+  height: 40px;
+  padding: 5px;
+  border-radius: 5px;
+}
+.b1{
+  height: 40px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #039da0;
+  color: #f0f0f0;
+}
+.my-link{
+  color:red;
+}

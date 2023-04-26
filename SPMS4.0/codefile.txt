@@ -1,0 +1,106 @@
+//studentCouseOutcome file
+
+***student data table
+<?php
+
+// Fetch data from the database
+$sql = "SELECT * FROM student_performance_outcome ";
+$result = $conn->query($sql);
+
+
+
+// Display the data in an HTML table
+if ($result->num_rows > 0) {
+    echo "<table><tr><th>Student ID</th><th>Course ID</th><th>Section</th><th>Semester</th><th>Year</th><th>Mid mark</th><th>MCO1</th><th>MCO2</th><th>MCO3</th><th>Final mark</th><th>FCO1</th><th>FCO2</th><th>FCO3</th><th>Total mark</th><th>Grade</th></tr>";
+    while($row = $result->fetch_assoc()) {
+        
+            echo "<tr><td>".$row["student_id"]."</td><td>".$row["course_id"]."</td><td>".$row["section_id"]."</td><td>".$row["semester"]."</td><td>".$row["year"]."</td><td>".$row["mid_mark"]."</td><td>".$row["mco1"]."</td><td>".$row["mco2"]."</td><td>".$row["mco3"]."</td><td>".$row["final_mark"]."</td><td>".$row["fco1"]."</td><td>".$row["fco2"]."</td><td>".$row["fco3"]."</td><td>".$row["total_mark"]."</td><td>".$row["grade"]."</td></tr>";
+        
+    }
+    echo "</table>";
+} else {
+    echo "0 results";
+}
+
+// Close the database connection
+$conn->close();
+?>
+
+
+
+////insert file
+<?php
+    include "connect.php";
+
+
+$student_id = $_POST['student_id'];
+$course_id = $_POST['course_id'];
+$section_id = $_POST['section_id'];
+$year = $_POST['year'];
+$semester = $_POST['semester'];
+$mid_mark = $_POST['mid_mark'];
+$final_mark = $_POST['final_mark'];
+$total_mark =$mid_mark + $final_mark;
+
+// mid mark calculate mco1, mco2, and mco3
+$mco1 = $mid_mark / 3;
+$mco2 = $mid_mark / 3;
+$mco3 = $mid_mark / 3;
+//final mark 
+$fco1 = $final_mark / 3;
+$fco2 = $final_mark / 3;
+$fco3 = $final_mark / 3;
+
+// Insert data into table
+$sql = "INSERT INTO student_data_backlog (student_id, course_id, section_id, year, semester, mco1, mco2, mco3, mid_mark , fco1 , fco2 , fco3 , final_mark, total_mark) VALUES ('$student_id', '$course_id',' $section_id', '$year', '$semester', '$mco1', '$mco2', '$mco3','$mid_mark' ,'$fco1','$fco2','$fco3', '$final_mark', '$total_mark')";
+$result = mysqli_query($con,$sql);
+if ($result === TRUE) {
+    echo "New record created successfully ";
+} else {
+    echo "Error: " . $sql . "<br>" . $con->error;
+}
+$con->close();
+
+?>
+////////csv query
+$sql = "INSERT INTO student_data_backlog (studentID,semester,courseID,sectionID,year,grade,facultyID,Time_stamp)
+                        VALUES ('$student_id', '$semester', '$course_id',' $section_id', '$year','$total_mark','$f_id','$timestamp')";
+
+
+//////csv file privious query
+if(isset($_POST["submit"])) {
+    if($_FILES["file"]["name"]) {
+        $filename = explode(".", $_FILES["file"]["name"]);
+        if($filename[1] == "csv") {
+            $handle = fopen($_FILES["file"]["tmp_name"], "r");
+            while($data = fgetcsv($handle)) {
+                $student_id = escape($data[0]);
+                $course_id = escape($data[1]);
+                $section_id = escape($data[2]);
+                $year = escape($data[3]);
+                $semester = escape($data[4]);
+                $mid_mark = escape($data[5]);
+                $final_mark = escape($data[6]);
+                $grade = escape($data[7]);
+                $mco1 = $mco2 = $mco3 = $mid_mark / 3;
+                $fco1 = $fco2 = $fco3 = $final_mark / 3;
+                $total_mark = $mid_mark + $final_mark;
+               
+
+                // insert data into student_performance_outcome table
+                $sql = "INSERT INTO student_performance_outcome (student_id, course_id, section_id, year, semester, mid_mark, final_mark, mco1, mco2, mco3, fco1, fco2, fco3, total_mark, grade)
+                        VALUES ('$student_id', '$course_id', '$section_id', '$year', '$semester', '$mid_mark', '$final_mark', '$mco1', '$mco2', '$mco3', '$fco1', '$fco2', '$fco3', '$total_mark', '$grade')";
+                mysqli_query($conn, $sql);
+            }
+            fclose($handle);
+            echo "Data imported successfully!";
+        }
+        else {
+            echo "Invalid file format! Only CSV files are allowed.";
+        }
+    }
+    else {
+        echo "Please choose a file to upload.";
+    }
+}
+?>
